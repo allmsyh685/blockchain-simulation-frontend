@@ -159,6 +159,7 @@ const navigationItems = computed(() => {
   }
 
   baseItems.push({ name: 'Blockchain', path: '/blockchain' })
+  baseItems.push({ name: 'Blockchain Simulation', path: '/blockchain-simulation' })
 
   return baseItems
 })
