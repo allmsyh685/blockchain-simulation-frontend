@@ -261,8 +261,8 @@ const submitTokens = async () => {
     const res = await axios.post(`/transactions/${transaction.value._id}/validate`, { tokens: tokenList });
     alert('Token berhasil divalidasi!');
     transaction.value.status = res.data.transaction.status;
-  } catch (err) {
-    console.error('Error while submitting tokens:', err.response.data);
+  } catch (err: unknown) {
+    console.error('Error while submitting tokens:', err instanceof Error ? err.message : 'Unknown error');
     alert('Gagal mengirim token');
   }
 }
@@ -398,7 +398,7 @@ function onTestDropZoneDecode(result: string) {
 }
 
 function onTestDropZoneError(e: unknown) {
-  alert('[DEBUG] Error: ' + e)
+  alert('[DEBUG] Error: ' + (e instanceof Error ? e.message : String(e)))
 }
 
 function openLiveScanner(itemName: string, idx: number) {
@@ -418,7 +418,7 @@ async function startZXingScanner() {
   try {
     const codeReader = new BrowserQRCodeReader()
     zxingControls = await codeReader.decodeFromVideoDevice(
-      null,
+      undefined,
       videoRef.value,
       (res, err) => {
         if (res && liveScannerTarget.value) {
@@ -431,8 +431,8 @@ async function startZXingScanner() {
         }
       }
     )
-  } catch (e: any) {
-    liveScannerError.value = e.message
+  } catch (e: unknown) {
+    liveScannerError.value = e instanceof Error ? e.message : String(e)
   }
 }
 function stopZXingScanner() {

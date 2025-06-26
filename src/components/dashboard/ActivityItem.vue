@@ -35,7 +35,7 @@ interface Props {
 const props = defineProps<Props>()
 
 const iconContainerClasses = computed(() => {
-  const colorClasses = {
+  const colorClasses: Record<string, string> = {
     request_created: 'bg-blue-500',
     offer_received: 'bg-green-500',
     transaction_completed: 'bg-purple-500',
@@ -46,7 +46,7 @@ const iconContainerClasses = computed(() => {
 })
 
 const activityIcon = computed(() => {
-  const icons = {
+  const icons: Record<string, any> = {
     request_created: DocumentIcon,
     offer_received: CurrencyDollarIcon,
     transaction_completed: CheckCircleIcon,

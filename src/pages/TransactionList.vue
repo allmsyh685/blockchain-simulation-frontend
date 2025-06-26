@@ -101,8 +101,8 @@ interface Transaction {
   createdAt: string;
   request?: { judul?: string };
   offer?: any;
-  buyer?: { name?: string };
-  vendor?: { name?: string };
+  buyer?: { name?: string; _id?: string };
+  vendor?: { name?: string; _id?: string };
   items: TransactionItem[];
 }
 
@@ -119,7 +119,7 @@ const getTransactions = async () => {
   loading.value = true;
   try {
     const response = await transactionService.getMyTransactions();
-    transactions.value = response.data || [];
+    transactions.value = (response.data || []) as unknown as Transaction[];
   } catch (err) {
     console.error('Failed to load transactions:', err);
     notificationStore.error('Failed to load transactions');

@@ -76,12 +76,12 @@ const handleShowMiningSteps = (blockIndex: number) => {
   try {
     const steps = mineBlockSteps(block, previousHash, blocks.value);
     miningSteps.value[block.index] = steps;
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('Error during mining simulation:', error);
     miningSteps.value[block.index] = [{
       nonce: 0,
       hash: '',
-      description: `Error: ${error.message}`,
+      description: `Error: ${error instanceof Error ? error.message : 'Unknown error'}`,
       messagePadding: '',
       messageScheduling: '',
       messageCompression: '',

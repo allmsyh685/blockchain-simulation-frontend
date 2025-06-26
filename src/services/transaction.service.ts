@@ -8,7 +8,7 @@ const transformTransaction = (apiTransaction: any): Transaction => {
     requestId: apiTransaction.request?._id || apiTransaction.request,
     offerId: apiTransaction.offer?._id || apiTransaction.offer,
     buyer: apiTransaction.buyer,
-    vendor: apiTransaction.vendor,
+    supplier: apiTransaction.vendor || apiTransaction.supplier,
     items: apiTransaction.items || [],
     totalAmount: apiTransaction.totalAmount,
     status: apiTransaction.status,

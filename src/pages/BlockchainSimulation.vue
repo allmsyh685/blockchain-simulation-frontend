@@ -101,8 +101,8 @@
                           </div>
                           <div>
                             <label class="text-xs text-gray-600">Tokens (Array):</label>
-                            <div v-for="(token, tIdx) in item.tokens || []" :key="tIdx" class="flex items-center mb-1">
-                              <input v-model="item.tokens[tIdx]" @input="onBlockFieldChange(peerIndex, blockIndex)" type="text" class="w-full p-1 border rounded text-xs mr-2" placeholder="Token ke-{{ tIdx + 1 }}" />
+                            <div v-for="(token, tIdx) in (item.tokens || [])" :key="tIdx" class="flex items-center mb-1">
+                              <input v-model="item.tokens![tIdx]" @input="onBlockFieldChange(peerIndex, blockIndex)" type="text" class="w-full p-1 border rounded text-xs mr-2" placeholder="Token ke-{{ tIdx + 1 }}" />
                               <button @click="item.tokens && item.tokens.splice(tIdx, 1); onBlockFieldChange(peerIndex, blockIndex)" class="text-red-500 text-xs ml-1">Hapus</button>
                             </div>
                             <button @click="() => { if (!item.tokens) item.tokens = []; item.tokens.push(''); onBlockFieldChange(peerIndex, blockIndex) }" class="text-xs bg-blue-100 px-2 py-1 rounded mt-1">Tambah Token</button>
