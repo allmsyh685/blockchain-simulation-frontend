@@ -27,10 +27,10 @@
           <!-- Vendor Avatar and Name -->
           <div class="flex items-center gap-3 mb-2">
             <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-blue-200 text-blue-700 font-bold text-lg">
-              {{ (tx.vendor?.name || 'V').charAt(0).toUpperCase() }}
+              {{ (tx.supplier?.name || 'V').charAt(0).toUpperCase() }}
             </span>
             <span class="text-sm text-gray-600">Vendor:</span>
-            <span class="font-medium text-gray-700">{{ tx.vendor?.name || 'Tidak diketahui' }}</span>
+            <span class="font-medium text-gray-700">{{ tx.supplier?.name || 'Tidak diketahui' }}</span>
           </div>
           <!-- Client Avatar and Name -->
           <div class="flex items-center gap-3 mb-2">
@@ -102,7 +102,7 @@ interface Transaction {
   request?: { judul?: string };
   offer?: any;
   buyer?: { name?: string; _id?: string };
-  vendor?: { name?: string; _id?: string };
+  supplier?: { name?: string; _id?: string };
   items: TransactionItem[];
 }
 
@@ -119,7 +119,9 @@ const getTransactions = async () => {
   loading.value = true;
   try {
     const response = await transactionService.getMyTransactions();
+    console.log('Raw transaction data:', response.data);
     transactions.value = (response.data || []) as unknown as Transaction[];
+    console.log('Processed transactions:', transactions.value);
   } catch (err) {
     console.error('Failed to load transactions:', err);
     notificationStore.error('Failed to load transactions');
@@ -166,7 +168,7 @@ const statusLabel = (status: string) => {
 
 const isVendor = (tx: Transaction) => {
   // Check if the logged-in user is the vendor for this transaction
-  return tx.vendor && authStore.user && tx.vendor._id === authStore.user._id;
+  return tx.supplier && authStore.user && tx.supplier._id === authStore.user._id;
 }
 
 const canDownloadTokens = (tx: Transaction) => {
