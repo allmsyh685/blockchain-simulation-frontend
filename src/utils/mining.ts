@@ -104,7 +104,7 @@ const normalizeBlockData = (blockData: any): any => {
   
   if (normalizedData.transactionId && typeof normalizedData.transactionId === 'object' && normalizedData.transactionId._id) {
     if (normalizedData.transactionId.items && Array.isArray(normalizedData.transactionId.items)) {
-      normalizedData.items = normalizedData.transactionId.items.map(item => ({
+      normalizedData.items = normalizedData.transactionId.items.map((item: any) => ({
         name: item.name,
         quantity: item.quantity,
         tokens: item.tokens,

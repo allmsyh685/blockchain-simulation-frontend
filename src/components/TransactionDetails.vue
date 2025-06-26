@@ -51,7 +51,8 @@ interface Props {
 
 const props = defineProps<Props>();
 
-
+// Debug flag - set to false for production
+const showDebug = ref(false);
 
 // Function untuk mengambil transaction ID yang benar
 const getTransactionId = () => {
